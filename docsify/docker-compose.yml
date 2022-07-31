@@ -1,0 +1,13 @@
+---
+version: '3.6'
+
+services:
+  proxmox-system-docs:
+    container_name: proxmox-system-docs
+    image: proxmox-system-docs:latest
+    build:
+      context: ..
+      dockerfile: ./docsify/Dockerfile
+    ports:
+    - 6007:80
+    restart: unless-stopped
