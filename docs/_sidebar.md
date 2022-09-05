@@ -1,4 +1,8 @@
 * [Proxmox System](/)
+* [Configure](/docs/configure.md)
+* [Virtual Machine](/docs/vm.md)
+* [Container](/docs/container.md)
+* [Upgrade](/docs/upgrade.md)
 * [Ideas](/docs/ideas.md)
 * [Contributing](/CONTRIBUTING.md)
 * [Licence](/LICENCE.md)

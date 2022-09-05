@@ -23,7 +23,7 @@
 
 Proxmox Installation and Configuration.
 
-TODO
+Proxmox is an advanced **Supervisor** to manage **Virtual Environment**, with it you can manage a **bigger server** with some VM and container if you want.
 
 ## Access
 
@@ -38,7 +38,9 @@ TODO
 
 1) First of all you need a **machine** to build this **server**, choose and build your server with this project : [Server Build](https://proginfra.gitlab.io/server_build/#/)
 2) With your machine, you can now install the **operating system** : **[Proxmox](https://www.proxmox.com/en/downloads/category/proxmox-virtual-environment)**. You need to install the system with a **USB Boot Key**, download the iso on the official website and see this [documentations](https://progdevlab.gitlab.io/dyntools/#/docs/global/boot) to create this Key.
-3) TODO
+3) Next you have to [configure](./docs/configure.md) it.
+4) Now you need to secure it, you can use this [documentation](https://progdevlab.gitlab.io/dyntools/#/docs/linux/ssh).
+5) Finally you can setup some [VM](./docs/vm.md) or [Container](./docs/container.md) with it.
 
 ### Server Access
 
@@ -47,7 +49,10 @@ TODO
 ## Documentations
 
 - [Ideas](./docs/ideas.md)
-- TODO
+- [Configure](./docs/configure.md)
+- [Virtual Machine](./docs/vm.md)
+- [Container](./docs/container.md)
+- [Upgrade](./docs/upgrade.md)
 
 ## Development
 
@@ -83,4 +88,4 @@ See [CONTRIBUTING](./CONTRIBUTING.md) for more information.
 
 This project is licensed under the terms of the MIT license.
 
-See [LICENSE](./LICENCE.md) for more information.
+See [LICENSE](./LICENCE) for more information.
