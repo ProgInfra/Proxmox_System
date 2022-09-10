@@ -9,6 +9,8 @@
   - [Main Repository](#main-repository)
   - [User](#user)
   - [Network](#network)
+    - [How to get Internet Access in your VM](#how-to-get-internet-access-in-your-vm)
+    - [How to setup Port Forwarding to your VM](#how-to-setup-port-forwarding-to-your-vm)
   - [Certificates](#certificates)
 
 ## Main Repository
@@ -47,7 +49,69 @@ Now you need to **create** a **new user** to connect to **SSH** to your **server
 
 ## Network
 
-TODO
+The network is an important part, first of all, you need to setup a Bridge for the main IP of your server :
+
+1) Go to **System/Network** (You should have a **Network Device** **enpXsX**)
+2) Create a new **Linux Bridge** **"vmbr0"** for the **main access**
+   1) **IPv4/CIDR** : 30.45.65.41/24 (what you have, it's a sample)
+   2) **Gateway** : 30.45.65.1 (what you have, it's a sample)
+   3) **Bridge ports** : enpXsX (what you have, it's a sample)
+3) Click on **Create** and you have your **main bridge** to access to your server !
+4) Now you need to create another **Linux Bridge** **"vmbr1"** for your **Virtual Machines**
+   1) **IPv4/CIDR** : 192.168.1.1/24 (what you want, it's a sample)
+5) Click on **Create** and you have your **VM bridge** !
+
+If you need it, install **ifupdown2** :
+
+```bash
+apt update && apt install ifupdown2
+```
+
+Now you have your **network ready**, you need to setup some **additional configuration** :
+
+### How to get Internet Access in your VM
+
+To grant **Internet Access** to your **VM**, you need to edit some config to the file **/etc/network/interfaces** of your **main Server** :
+
+```conf
+iface vmbr1 inet static
+  address  192.168.1.1
+  netmask  255.255.255.0
+  bridge-ports none
+  bridge-stp off
+  bridge-fd 0
+
+  post-up   echo 1 > /proc/sys/net/ipv4/ip_forward
+  post-up   iptables -t nat -A POSTROUTING -s '192.168.1.0/24' -o vmbr0 -j MASQUERADE
+  post-down iptables -t nat -D POSTROUTING -s '192.168.1.0/24' -o vmbr0 -j MASQUERADE 
+
+  post-up   iptables -t raw -I PREROUTING -i fwbr+ -j CT --zone 1  
+  post-down iptables -t raw -D PREROUTING -i fwbr+ -j CT --zone 1 
+```
+
+In your **VM**, you can configure your network like this :
+
+- **IP** : 192.168.1.10
+- **Mask** : 255.255.255.0
+- **Gateway** : 30.45.65.41
+
+### How to setup Port Forwarding to your VM
+
+Now if you want to access some services in your VM with port, you need to map port of your main server public IP to your VM IP, here is an example to setup Port Forwarding for port 80 and 443 to the VM with the IP 192.168.1.10 :
+
+```bash
+iptables -t nat -A PREROUTING -p tcp -d 30.45.65.41 --dport 80 -i vmbr0 -j DNAT --to-destination 192.168.1.10:80
+iptables -t nat -A PREROUTING -p tcp -d 30.45.65.41 --dport 443 -i vmbr0 -j DNAT --to-destination 192.168.1.10:443
+
+# To Display IPTables Rules
+iptables -t nat -L --line-numbers
+
+# If needed to persist config between reboot
+apt-get install iptables-persistent
+
+# Files which contains the configuration
+cat /etc/iptables/rules
+```
 
 ## Certificates
 
