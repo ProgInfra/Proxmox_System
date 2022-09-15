@@ -93,15 +93,17 @@ In your **VM**, you can configure your network like this :
 
 - **IP** : 192.168.1.10
 - **Mask** : 255.255.255.0
-- **Gateway** : 30.45.65.41
+- **Gateway** : 192.168.1.1
+- **DNS Server Name** : 8.8.8.8, 1.1.1.1
 
 ### How to setup Port Forwarding to your VM
 
-Now if you want to access some services in your VM with port, you need to map port of your main server public IP to your VM IP, here is an example to setup Port Forwarding for port 80 and 443 to the VM with the IP 192.168.1.10 :
+Now if you want to access some services in your VM with port, you need to map port of your main server public IP to your VM IP, here is an example to setup Port Forwarding for port 80, 443 and 22 to the VM with the IP 192.168.1.10 :
 
 ```bash
 iptables -t nat -A PREROUTING -p tcp -d 30.45.65.41 --dport 80 -i vmbr0 -j DNAT --to-destination 192.168.1.10:80
 iptables -t nat -A PREROUTING -p tcp -d 30.45.65.41 --dport 443 -i vmbr0 -j DNAT --to-destination 192.168.1.10:443
+iptables -t nat -A PREROUTING -p tcp -d 30.45.65.41 --dport 2223 -i vmbr0 -j DNAT --to-destination 192.168.1.10:2223
 
 # To Display IPTables Rules
 iptables -t nat -L --line-numbers
