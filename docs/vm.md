@@ -43,8 +43,8 @@ Now to add some services, you need a Virtual Machine, here is how to create one 
 
 ## Configure
 
-TODO Firewall
+If you want, you can add some **rules** to secure access **in** and **out** from to your **VM**.
 
 ## Backup
 
-TODO
+If you want, you can **backup** and **restore** some **snapshot** with **Proxmox**.
