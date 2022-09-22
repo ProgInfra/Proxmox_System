@@ -112,7 +112,10 @@ iptables -t nat -L --line-numbers
 apt-get install iptables-persistent
 
 # Files which contains the configuration
-cat /etc/iptables/rules
+cat /etc/iptables/rules.v4
+
+# Delete Rules
+iptables -t nat -D PREROUTING 2
 ```
 
 ## Certificates

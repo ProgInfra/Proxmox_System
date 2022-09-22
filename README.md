@@ -40,18 +40,17 @@ Proxmox is an advanced **Supervisor** to manage **Virtual Environment**, with it
 2) With your machine, you can now install the **operating system** : **[Proxmox](https://www.proxmox.com/en/downloads/category/proxmox-virtual-environment)**. You need to install the system with a **USB Boot Key**, download the iso on the official website and see this [documentations](https://progdevlab.gitlab.io/dyntools/#/docs/global/boot) to create this Key.
 3) Next you have to [configure](./docs/configure.md) it.
 4) Now you need to secure it, you can use this [documentation](https://progdevlab.gitlab.io/dyntools/#/docs/linux/ssh).
-5) Finally you can setup some [VM](./docs/vm.md) or [Container](./docs/container.md) with it.
+5) Finally you can setup some [VM](./docs/vm.md) with it.
 
 ### Server Access
 
-- TODO
+- [Proxmox Admin Panel](https://IP:8006)
 
 ## Documentations
 
 - [Ideas](./docs/ideas.md)
 - [Configure](./docs/configure.md)
 - [Virtual Machine](./docs/vm.md)
-- [Container](./docs/container.md)
 - [Upgrade](./docs/upgrade.md)
 
 ## Development
