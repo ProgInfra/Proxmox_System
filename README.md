@@ -73,10 +73,10 @@ We use **Docker** :
 cd docsify
 
 # Development
-docker-compose -f docker-compose.dev.yml up
+docker compose -f docker-compose.dev.yml up
 
 # Production
-docker-compose up --build
+docker compose up --build
 ```
 
 ## Contributing
