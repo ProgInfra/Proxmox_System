@@ -111,6 +111,9 @@ iptables -t nat -L --line-numbers
 # If needed to persist config between reboot
 apt-get install iptables-persistent
 
+# Save new rules
+/sbin/iptables-save > /etc/iptables/rules.v4
+
 # Files which contains the configuration
 cat /etc/iptables/rules.v4
 
